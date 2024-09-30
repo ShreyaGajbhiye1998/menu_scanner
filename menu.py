@@ -84,12 +84,9 @@ def extract_text_from_image(image_stream):
 def extract_text_from_pdf(pdf_stream):
     try:
         all_text = ""
-        # Open the PDF using pdfplumber
         with pdfplumber.open(pdf_stream) as pdf:
-            # Loop through all the pages
             for i, page in enumerate(pdf.pages):
                 st.write(f'Extracting text from Page {i+1}')
-                # Extract text from the current page
                 page_text = page.extract_text()
                 if page_text:
                     all_text += page_text + "\n\n"
@@ -246,22 +243,7 @@ def generate_text(prompt):
         st.error(f"Error generating structured text: {e}")
         return ""
 
-# def generate_text(prompt):
-#     try:
-#         response = client.chat.completions.create(
-#             model=deployment_name,
-#             messages=[
-#                 {"role": "system", "content": "You are a helpful assistant that formats text into structured data."},
-#                 {"role": "user", "content": f"""Parse the following text and structure it into an Excel-compatible format. Use '|' as the delimiter for each column in the output. Don't write anything else or break format.\n\n{prompt}"""}
-#             ],
-#             max_tokens=2000,
-#             temperature=0.3
-#         )
-#         structured_text = response.choices[0].message.content.strip()
-#         return structured_text
-#     except Exception as e:
-#         st.error(f"Error generating structured text: {e}")
-#         return ""
+
 
     
 def structured_text_to_df(structured_text):
@@ -275,10 +257,6 @@ def structured_text_to_df(structured_text):
         df.columns = df.iloc[0]
         df = df.drop(0).reset_index(drop=True)
         return df
-
-
-    
-
     except Exception as e:
         st.error("Error converting the structured text into a dataframe: {e}")
         return pd.DataFrame()
@@ -300,7 +278,7 @@ def create_excel(df):
 
 
 # Streamlit app
-st.title("Image Text Extraction")
+st.title("Menu Scanner")
 
 
 if 'extracted_text' not in st.session_state:
@@ -325,9 +303,8 @@ if uploaded_file is not None:
         image_stream = BytesIO(uploaded_file.getvalue())
         extracted_text = extract_text_from_image(image_stream)
     elif uploaded_file.type == "application/pdf":
-        st.write("Processing PDF...")
-        # extracted_text = extract_text_from_pdf(uploaded_file)
-        extracted_text = extract_text_from_pdf(uploaded_file)
+        with st.spinner("Processing PDF...")
+            extracted_text = extract_text_from_pdf(uploaded_file)
     
     # Display the extracted text
     if extracted_text:
@@ -336,8 +313,8 @@ if uploaded_file is not None:
 
 if st.session_state.extracted_text:
     # Generate structured text using Azure OpenAI
-    st.write("Extracted Text:")
-    st.text_area("Extracted Text Area", st.session_state.extracted_text, height=200)
+    # st.write("Extracted Text:")
+    # st.text_area("Extracted Text Area", st.session_state.extracted_text, height=200)
     if st.button("Generate structured_text"):
         st.write("Generating structured text...")
         # print("Extracted_text",extracted_text)
