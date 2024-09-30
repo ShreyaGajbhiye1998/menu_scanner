@@ -303,7 +303,7 @@ if uploaded_file is not None:
         image_stream = BytesIO(uploaded_file.getvalue())
         extracted_text = extract_text_from_image(image_stream)
     elif uploaded_file.type == "application/pdf":
-        with st.spinner("Processing PDF...")
+        with st.spinner("Processing PDF..."):
             extracted_text = extract_text_from_pdf(uploaded_file)
     
     # Display the extracted text
