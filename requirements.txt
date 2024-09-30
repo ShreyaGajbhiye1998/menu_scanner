@@ -1,0 +1,7 @@
+streamlit
+Pillow
+pdf2image
+azure-cognitiveservices-vision-computervision
+openai
+pdfplumber
+pandas

@@ -1,0 +1,13 @@
+{
+    "azure_cv_endpoint": "https://shreya-imageai.cognitiveservices.azure.com/",
+    "azure_cv_api_key": "261f66556515467db07eaf1c5e2b60cc",
+    "azure_document_api_key" : "d57d9e7e6fc647a98af8897e886d7d89",  
+    "azure_document_endpoint" : "https://shreya-documentai.cognitiveservices.azure.com/",
+    "azure_api_key": "aa92be90884d495c98ba2d3db6f1f7a5",
+    "azure_api_version":"2024-02-01",
+    "azure_endpoint": "https://mypay-ai2.openai.azure.com/",
+    "deployment_name": "mypay-ai-gpt4"
+    
+}
+
+
