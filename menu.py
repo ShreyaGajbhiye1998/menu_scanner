@@ -14,16 +14,16 @@ from msrest.authentication import CognitiveServicesCredentials
 from openai import AzureOpenAI
 
 # Load configuration
-config_path = 'config.json'
-with open(config_path, 'r') as config_file:
-    config = json.load(config_file)
+# config_path = 'config.json'
+# with open(config_path, 'r') as config_file:
+#     config = json.load(config_file)
 
-azure_api_key = config['azure_api_key']
-azure_api_version = config['azure_api_version']
-azure_endpoint = config['azure_endpoint']
-deployment_name = config['deployment_name']
-azure_cv_api_key = config['azure_cv_api_key']
-azure_cv_endpoint = config['azure_cv_endpoint']
+azure_api_key = st.secrets['azure_api_key']
+azure_api_version = st.secrets['azure_api_version']
+azure_endpoint = st.secrets['azure_endpoint']
+deployment_name = st.secrets['deployment_name']
+azure_cv_api_key = st.secrets['azure_cv_api_key']
+azure_cv_endpoint = st.secrets['azure_cv_endpoint']
 
 # Initialize Azure clients
 client = AzureOpenAI(
